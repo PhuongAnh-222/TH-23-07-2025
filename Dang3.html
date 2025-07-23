@@ -1,0 +1,59 @@
+<!-- Dạng 3: In the between Durian.. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dạng 3: Check Date Between</title>
+</head>
+<body>
+
+    <input id="inputdate" type="text" placeholder="DD-MM-YYYY">
+    <button id="btncheck">Kiểm tra</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var inputdate = document.getElementById("inputdate");
+        var btncheck = document.getElementById("btncheck");
+        var display = document.getElementById("display");
+
+        function CHECK_DATE_BETWEEN() {
+            var dateStr = inputdate.value.trim();
+            var parts = dateStr.split("-");
+
+            if (parts.length !== 3) {
+                display.innerText = "Bạn nhập sai định dạng (DD-MM-YYYY)";
+                return;
+            }
+
+            var day = parseInt(parts[0], 10);
+            var month = parseInt(parts[1], 10);
+            var year = parseInt(parts[2], 10);
+
+            var input = new Date(year, month - 1, day);
+            if (input.getDate() !== day || input.getMonth() !== month - 1 || input.getFullYear() !== year) {
+                display.innerText = "Ngày không hợp lệ!";
+                return;
+            }
+
+            // Tạo khoảng giới hạn
+            var startDate = new Date(2000, 0, 1); 
+            var endDate = new Date(2030, 11, 31); 
+
+            // Reset time về 0h để so sánh chính xác
+            input.setHours(0, 0, 0, 0);
+            startDate.setHours(0, 0, 0, 0);
+            endDate.setHours(0, 0, 0, 0);
+
+            if (input >= startDate && input <= endDate) {
+                display.innerText = "Ngày bạn nhập nằm trong khoảng cho phép!";
+            } else {
+                display.innerText = "Ngày bạn nhập nằm ngoài khoảng 01-01-2000 đến 31-12-2030.";
+            }
+        }
+
+        btncheck.onclick = CHECK_DATE_BETWEEN;
+    </script>
+
+</body>
+</html>

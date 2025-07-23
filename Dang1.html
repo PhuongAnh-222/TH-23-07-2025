@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra Ngày</title>
+</head>
+<body>
+    <input id="inputdate" type="text" placeholder="DD-MM-YYYY">
+    <button id="btnprint">Kiểm tra</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var inputdate = document.getElementById('inputdate');
+        var btnprint = document.getElementById('btnprint');
+        var display = document.getElementById('display');
+
+        function CHECKDATE() {
+            var dateStr = inputdate.value;
+            var parts = dateStr.split("-"); 
+            if (parts.length !== 3) {
+                display.innerText = "Bạn nhập sai định dạng";
+                return;
+            }
+
+            var day = parseInt(parts[0], 10);
+            var month = parseInt(parts[1], 10);
+            var year = parseInt(parts[2], 10);
+
+            
+            var date = new Date(year, month - 1, day);
+
+            
+            if (date.getDate() !== day || date.getMonth() !== (month - 1) || date.getFullYear() !== year) {
+                display.innerText = "Ngày không hợp lệ!";
+            } else {
+                display.innerText = "Ngày hợp lệ: " + day + "/" + month + "/" + year;
+            }
+        }
+
+        btnprint.onclick = CHECKDATE;
+    </script>
+</body>
+</html>

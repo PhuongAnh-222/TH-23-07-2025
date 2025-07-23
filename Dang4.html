@@ -1,0 +1,56 @@
+<!-- Dạng 4: get FullYear, getMonth, getDate... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dạng 4: getFullYear, getMonth, getDate...</title>
+</head>
+<body>
+
+    <input id="inputdate" type="text" placeholder="DD-MM-YYYY">
+    <button id="btnget">Lấy thông tin ngày</button>
+    <br>
+    <div id="output"></div>
+
+    <script>
+        const inputdate = document.getElementById("inputdate");
+        const btnget = document.getElementById("btnget");
+        const output = document.getElementById("output");
+
+        btnget.onclick = function () {
+            const value = inputdate.value.trim();
+            const parts = value.split("-");
+
+            if (parts.length !== 3) {
+                output.innerText = "Định dạng không hợp lệ (DD-MM-YYYY)";
+                return;
+            }
+
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+
+            const date = new Date(year, month - 1, day);
+
+            if (date.getDate() !== day || date.getMonth() !== month - 1 || date.getFullYear() !== year) {
+                output.innerText = "Ngày không hợp lệ!";
+                return;
+            }
+
+            const weekdays = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+
+            const result = `
+                Ngày hợp lệ!<br>
+                Năm: ${date.getFullYear()}<br>
+                Tháng: ${date.getMonth() + 1}<br>
+                Ngày trong tháng: ${date.getDate()}<br>
+                Thứ: ${weekdays[date.getDay()]}<br>
+                Giờ hiện tại: ${date.getHours()}h${date.getMinutes()}m${date.getSeconds()}s
+            `;
+
+            output.innerHTML = result;
+        };
+    </script>
+
+</body>
+</html>

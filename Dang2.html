@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input id="inputdate" type="text" placeholder="DD-MM-YYYY">
+    <button id="btnprint">Check</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var inputdate = document.getElementById('inputdate');
+        var btnprint = document.getElementById('btnprint');
+        var display = document.getElementById('display');
+
+        function CHECKDATE() {
+            var dateStr = inputdate.value.trim();
+            var parts = dateStr.split("-");
+
+            if (parts.length !== 3) {
+                display.innerText = "Bạn nhập sai định dạng";
+                return;
+            }
+
+            var day = parseInt(parts[0], 10);
+            var month = parseInt(parts[1], 10);
+            var year = parseInt(parts[2], 10);
+
+            var date = new Date(year, month - 1, day);
+
+            if (date.getDate() !== day || date.getMonth() !== (month - 1) || date.getFullYear() !== year) {
+                display.innerText = "Ngày không hợp lệ";
+                return;
+            }
+
+            var today = new Date();
+            today.setHours(0, 0, 0, 0); // reset time to compare date only
+            date.setHours(0, 0, 0, 0); // reset input date time
+
+            if (date.getTime() > today.getTime()) {
+                display.innerText = "Ngày bạn nhập là tương lai";
+            } else if (date.getTime() === today.getTime()) {
+                display.innerText = "Ngày bạn nhập là hôm nay";
+            } else {
+                display.innerText = "Ngày bạn nhập là quá khứ";
+            }
+        }
+
+        btnprint.onclick = CHECKDATE;
+    </script>
+</body>
+</html>
