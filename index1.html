@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link</title>
+    <title>Kiểm Tra URL</title>
 </head>
+
 <body>
-
-    <input id="inputlink" type="text" placeholder="inputlink">
-    <button id="btncheck">check</button>
-    <br>
-    <span id="display"></span>
-
+    <h2>Nhập URL</h2>
+    <input type="text" id="inputURL" placeholder="Nhập URL (VD: https://example.com)">
+    <button id="btnSubmit">Gửi</button> <br>
+    <span id="message"></span>
 
     <script>
-        var inputlink=document.getElementById('inputlink');
-        var btncheck=document.getElementById('btncheck');
-        var display=document.getElementById('display');
+        var inputURL = document.getElementById('inputURL');
+        var btnSubmit = document.getElementById('btnSubmit');
+        var message = document.getElementById('message');
 
-        function CHECK () {
-            var pattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9\-]+\.[a-z]{2,}(\/\S*)?$/;
-            var logic=pattern.test(inputlink.value);
-            if (logic) {
-                display.innerText="Đăng nhập thành công"
-            }
-            else {
-                display.innerText="Đăng nhập không thành công"
-            }
-
+        function validateURL(url) {
+            var urlPattern = /^(https?:\/\/)?([a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+)(:[0-9]{1,5})?(\/.*)?$/;
+            return urlPattern.test(url);
         }
 
-        btncheck.onclick= CHECK;
+        function handleSubmit() {
+            if (validateURL(inputURL.value)) {
+                message.innerText = 'URL hợp lệ!';
+                message.style.color = 'green';
+            } else {
+                message.innerText = 'URL không hợp lệ. Vui lòng nhập lại.';
+                message.style.color = 'red';
+            }
+        }
 
-
+        btnSubmit.onclick = handleSubmit;
     </script>
-    
 </body>
+
 </html>
