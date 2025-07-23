@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link</title>
+</head>
+<body>
+
+    <input id="inputlink" type="text" placeholder="inputlink">
+    <button id="btncheck">check</button>
+    <br>
+    <span id="display"></span>
+
+
+    <script>
+        var inputlink=document.getElementById('inputlink');
+        var btncheck=document.getElementById('btncheck');
+        var display=document.getElementById('display');
+
+        function CHECK () {
+            var pattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9\-]+\.[a-z]{2,}(\/\S*)?$/;
+            var logic=pattern.test(inputlink.value);
+            if (logic) {
+                display.innerText="Đăng nhập thành công"
+            }
+            else {
+                display.innerText="Đăng nhập không thành công"
+            }
+
+        }
+
+        btncheck.onclick= CHECK;
+
+
+    </script>
+    
+</body>
+</html>

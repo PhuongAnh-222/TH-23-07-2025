@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link</title>
+</head>
+<body>
+
+    <input id="inputEmail" type="text" placeholder="inputEmail">
+    <button id="btncheck">check</button>
+    <br>
+    <span id="display"></span>
+
+
+    <script>
+        var inputEmail=document.getElementById('inputEmail');
+        var btncheck=document.getElementById('btncheck');
+        var display=document.getElementById('display');
+
+        function CHECK () {
+
+            var pattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            var email = inputEmail.value.trim();
+            if (pattern.test(email)) {
+                display.innerText="Email hợp lệ"
+            }
+            else {
+                display.innerText="Email không hợp lệ"
+            }
+
+        }
+
+        btncheck.onclick= CHECK;
+
+
+    </script>
+    
+</body>
+</html>
