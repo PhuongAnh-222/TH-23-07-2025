@@ -1,0 +1,44 @@
+<!-- Kiểm tra text vừa nhập là số hay chuỗi -->
+ <!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm Tra Ngày Tháng</title>
+</head>
+
+<body>
+    <h2>Nhập Ngày (DD-MM-YYYY)</h2>
+    <input type="text" id="inputDate" placeholder="Nhập ngày (VD: 23-07-2025)">
+    <button id="btnSubmit">Gửi</button> <br>
+    <span id="message"></span>
+
+    <script>
+        var inputDate = document.getElementById('inputDate');
+        var btnSubmit = document.getElementById('btnSubmit');
+        var message = document.getElementById('message');
+
+        function validateDate(date) {
+            var datePattern = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4})$/;
+            return datePattern.test(date);
+        }
+
+        function handleSubmit() {
+            const dateValue = inputDate.value;
+
+            // Kiểm tra định dạng ngày tháng
+            if (validateDate(dateValue)) {
+                message.innerText = 'Ngày hợp lệ!';
+                message.style.color = 'green';
+            } else {
+                message.innerText = 'Ngày không hợp lệ. Vui lòng nhập lại theo định dạng DD-MM-YYYY.';
+                message.style.color = 'red';
+            }
+        }
+
+        btnSubmit.onclick = handleSubmit;
+    </script>
+</body>
+
+</html>

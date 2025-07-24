@@ -1,0 +1,117 @@
+<!-- Kết hợp 10 câu điều kiện -->
+ <!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm Tra Dữ Liệu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: calc(100% - 16px);
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 5px;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Nhập Dữ Liệu</h2>
+    <input type="text" id="input1" placeholder="Nhập số hoặc chuỗi">
+    <div id="result1" class="result"></div>
+    
+    <input type="text" id="input2" placeholder="Nhập ngày (DD-MM-YYYY hoặc DD/MM/YYYY)">
+    <div id="result2" class="result"></div>
+    
+    <input type="text" id="input3" placeholder="Nhập mã Bệnh Nhân (VD: BN-20230701-001)">
+    <div id="result3" class="result"></div>
+    
+    <input type="text" id="input4" placeholder="Nhập số điện thoại (10 chữ số)">
+    <div id="result4" class="result"></div>
+    
+    <input type="text" id="input5" placeholder="Nhập email (VD: example@example.com)">
+    <div id="result5" class="result"></div>
+    
+    <input type="text" id="input6" placeholder="Nhập căn cước công dân (9 hoặc 12 số)">
+    <div id="result6" class="result"></div>
+    
+    <input type="text" id="input7" placeholder="Nhập tên (ít nhất 2 từ)">
+    <div id="result7" class="result"></div>
+    
+    <input type="text" id="input8" placeholder="Nhập mật khẩu an toàn (ít nhất 8 ký tự, có chữ hoa, chữ thường)">
+    <div id="result8" class="result"></div>
+    
+    <button id="btnSubmit">Gửi</button>
+
+    <script>
+        var inputs = [];
+        var results = [];
+        for (let i = 1; i <= 8; i++) {
+            inputs.push(document.getElementById(`input${i}`));
+            results.push(document.getElementById(`result${i}`));
+        }
+        var btnSubmit = document.getElementById('btnSubmit');
+
+        function validateInput(input, index) {
+            var datePattern = /^(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[0-2])[-/](\d{4})$/;
+            var patientIdPattern = /^BN-\d{8}-\d{3}$/; // Mã Bệnh Nhân
+            var phonePattern = /^\d{10}$/; // 10 chữ số
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            var cccdPattern = /^\d{9}|\d{12}$/; // Căn cước công dân (9 hoặc 12 số)
+            var namePattern = /^(?=.*\S)(?=.*\S.*\S)/; // Tên (ít nhất 2 từ)
+            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Mật khẩu an toàn
+
+            switch (index) {
+                case 1: // Số hoặc chuỗi
+                    return input.trim() !== "" ? 'Hợp lệ' : 'Không hợp lệ';
+                case 2: // Ngày tháng
+                    return datePattern.test(input) ? 'Ngày hợp lệ' : 'Ngày không hợp lệ';
+                case 3: // Mã Bệnh Nhân
+                    return patientIdPattern.test(input) ? 'Mã Bệnh Nhân hợp lệ' : 'Mã không hợp lệ';
+                case 4: // Số điện thoại
+                    return phonePattern.test(input) ? 'Số điện thoại hợp lệ' : 'Số điện thoại không hợp lệ';
+                case 5: // Email
+                    return emailPattern.test(input) ? 'Email hợp lệ' : 'Email không hợp lệ';
+                case 6: // Căn cước công dân
+                    return cccdPattern.test(input) ? 'Căn cước công dân hợp lệ' : 'Căn cước công dân không hợp lệ';
+                case 7: // Tên
+                    return namePattern.test(input) ? 'Tên hợp lệ' : 'Tên không hợp lệ';
+                case 8: // Mật khẩu an toàn
+                    return passwordPattern.test(input) ? 'Mật khẩu an toàn hợp lệ' : 'Mật khẩu không hợp lệ';
+                default:
+                    return 'Không hợp lệ';
+            }
+        }
+
+        function handleSubmit() {
+            inputs.forEach((input, index) => {
+                const result = validateInput(input.value.trim(), index + 1);
+                results[index].innerText = result;  // Hiển thị kết quả dưới từng input
+            });
+        }
+
+        btnSubmit.onclick = handleSubmit;
+    </script>
+</body>
+
+</html>

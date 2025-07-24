@@ -1,0 +1,47 @@
+<!-- Kiểm tra mã bệnh nhân BN-20230701-001 -->
+ <!-- Câu 6: Kiểm tra mã bệnh nhân BN-20230701-001 -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra mã bệnh nhân</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="text" placeholder="Nhập mã BN">
+    <button id="btncheck">Check</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var input = document.getElementById('input');
+        var btncheck = document.getElementById('btncheck');
+        var display = document.getElementById('display');
+
+        function CHECK() {
+            var value = input.value.trim();
+            
+            var regex = /^BN-\d{8}-\d{3}$/;
+
+            if (value === "") {
+                display.innerText = "Vui lòng nhập mã bệnh nhân";
+                display.className = "error";
+            } else if (regex.test(value)) {
+                display.innerText = "mã bệnh nhân hợp lệ";
+                display.className = "success";
+            } else {
+                display.innerText = " Mã bệnh nhân không hợp lệ";
+                display.className = "error";
+            }
+        }
+
+        btncheck.onclick = CHECK;
+    </script>

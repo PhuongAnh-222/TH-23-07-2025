@@ -1,0 +1,51 @@
+<!-- Câu 5: Kiểm tra nhập họ và tên (ít nhất 2 từ, không dùng regex) -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra họ tên</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="text" placeholder="Nhập họ và tên">
+    <button id="btncheck">Check</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var input = document.getElementById('input');
+        var btncheck = document.getElementById('btncheck');
+        var display = document.getElementById('display');
+
+        function CHECK() {
+            var value = input.value.trim();
+
+            if (value === "") {
+                display.innerText = "Vui lòng nhập họ và tên";
+                display.className = "error";
+                return;
+            }
+
+            var words = value.split(" ").filter(word => word !== "");
+
+            if (words.length >= 2) {
+                display.innerText = "Tên hợp lệ";
+                display.className = "success";
+            } else {
+                display.innerText ="Tên không hợp lệ";
+                display.className = "error";
+            }
+        }
+
+        btncheck.onclick = CHECK;
+    </script>
+</body>
+</html>

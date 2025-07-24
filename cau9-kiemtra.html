@@ -1,0 +1,45 @@
+<!-- Kiểm tra mật khẩu mạnh -->
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra Mật Khẩu Mạnh</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="text" placeholder="Nhập mật khẩu">
+    <button id="btncheck">Check</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var input = document.getElementById('input');
+        var btncheck = document.getElementById('btncheck');
+        var display = document.getElementById('display');
+
+        function CHECKPASSWORD() {
+            var value = input.value;
+            var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+            if (pattern.test(value)) {
+                display.innerText = "Mật khẩu mạnh";
+                display.className = "success";
+            } else {
+                display.innerText = "Mật khẩu yếu. Cần ít nhất 8 ký tự, gồm chữ hoa, thường và số.";
+                display.className = "error";
+            }
+        }
+
+        btncheck.onclick = CHECKPASSWORD;
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!-- Check mail hợp lệ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra Email</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="text" placeholder="Nhập email">
+    <button id="btncheck">Check</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        var input = document.getElementById('input');
+        var btncheck = document.getElementById('btncheck');
+        var display = document.getElementById('display');
+
+        function CHECKEMAIL() {
+            var value = input.value;
+            var pattern = /^[\w.-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+
+            if (pattern.test(value)) {
+                display.innerText = "Email hợp lệ";
+                display.className = "success";
+            } else {
+                display.innerText = "Email không hợp lệ";
+                display.className = "error";
+            }
+        }
+
+        btncheck.onclick = CHECKEMAIL;
+    </script>
+</body>
+</html>

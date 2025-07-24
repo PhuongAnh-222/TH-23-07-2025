@@ -1,0 +1,42 @@
+<!-- Kiểm tra cccd (là 9 hoặc 12 số) -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra CCCD</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <input id="input" type="text" placeholder="Nhập CCCD">
+    <button id="btncheck">Check</button>
+    <br>
+    <span id="display"></span>
+
+    <script>
+        function CHECKCCCD() {
+            var input = document.getElementById('input');
+            var display = document.getElementById('display');
+            var value = input.value;
+
+            if (/^\d{9}$/.test(value) || /^\d{12}$/.test(value)) {
+                display.innerText = "CCCD hợp lệ";
+                display.className = "success";
+            } else {
+                display.innerText = "CCCD không hợp lệ";
+                display.className = "error";
+            }
+        }
+
+        document.getElementById('btncheck').addEventListener('click', CHECKCCCD);
+    </script>
+</body>
+</html>
